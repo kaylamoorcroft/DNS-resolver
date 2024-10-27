@@ -1,0 +1,11 @@
+{
+    "name": "dns-resolver",
+    "version": "0.1.0",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "description": "Resolves domains into IP addresses",
+    "author": "Kayla Moorcroft",
+    "license": "MIT"
+}
