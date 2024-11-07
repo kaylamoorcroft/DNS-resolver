@@ -1,5 +1,6 @@
 const dgram = require('dgram');
 const express = require('express');
+const bodyParser = require("body-parser");
 const app = express();
 const port = 3000; 
 const server = '8.8.8.8';  // Google's public DNS server 
@@ -9,9 +10,17 @@ const socket = dgram.createSocket('udp4');
 // give access to files in public directory
 app.use('/public', express.static(`${process.cwd()}/public`));
 
+// for parsing body of post requests
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 // serve home page
 app.get('/', function(req, res) {
     res.sendFile(process.cwd() + '/views/index.html');
+});
+
+app.post('/api/ip',function(req,res) {
+    res.json({domain: req.body.domain});
 });
 
 /**
