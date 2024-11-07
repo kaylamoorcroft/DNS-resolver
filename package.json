@@ -9,6 +9,7 @@
     "author": "Kayla Moorcroft",
     "license": "MIT",
     "dependencies": {
-        "dgram": "^1.0.1"
+        "dgram": "^1.0.1",
+        "express": "^4.21.1"
     }
 }

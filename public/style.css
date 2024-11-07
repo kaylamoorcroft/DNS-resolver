@@ -1,0 +1,22 @@
+body {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+    margin: 50px 100px;
+    background: lavender;
+}
+input {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align:center;
+    padding: 10px;
+    margin: 10px 5px;
+}
+#domain-input {
+    width: 250px;
+}
+footer {
+    position: fixed;
+    bottom: 10px;
+    width: 85%;
+    text-align: center;
+    color: grey;
+}

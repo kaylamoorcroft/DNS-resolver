@@ -1,10 +1,18 @@
 const dgram = require('dgram');
-const server = '8.8.8.8';  // Google's public DNS server
-const port = 53;  
+const express = require('express');
+const app = express();
+const port = 3000; 
+const server = '8.8.8.8';  // Google's public DNS server 
 
 const socket = dgram.createSocket('udp4');
 
-console.log("hello world")
+// give access to files in public directory
+app.use('/public', express.static(`${process.cwd()}/public`));
+
+// serve home page
+app.get('/', function(req, res) {
+    res.sendFile(process.cwd() + '/views/index.html');
+});
 
 /**
  * Creates a DNS query packet in the proper structure with a header and question section.
@@ -32,3 +40,7 @@ function createQuery(domain) {
 const dnsQuery = createQuery("www.google.com");
 console.log(dnsQuery);
 console.log(dnsQuery.toString());
+
+app.listen(port, function() {
+    console.log(`Listening on port ${port}`);
+  });
