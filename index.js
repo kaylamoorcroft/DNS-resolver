@@ -78,6 +78,18 @@ const dnsQuery = createQuery("www.google.com");
 console.log(dnsQuery);
 console.log(dnsQuery.toString());
 
+// Send the query packet to a DNS server
+socket.send(dnsQuery, 53, '8.8.8.8', (err) => {
+    if (err) console.error('Error sending query:', err);
+    else console.log('Query sent');
+});
+
+socket.on('message', (response) => {
+    console.log('DNS Response:', response);
+    parseResponse(response);
+    socket.close();
+});
+
 app.listen(port, function() {
     console.log(`Listening on port ${port}`);
   });
