@@ -20,7 +20,10 @@ app.get('/', function(req, res) {
 });
 
 app.post('/api/ip',function(req,res) {
-    res.json({domain: req.body.domain});
+    getIpAddress(req.body.domain).then(ipAddress => {
+        console.log(ipAddress);
+        res.json({domain: req.body.domain, ip: ipAddress});
+    });
 });
 
 /**
@@ -93,7 +96,7 @@ function getIpAddress(domain) {
             console.log('DNS Response:', response);
             const res = parseResponse(query, response);
             resolve(res);
-            socket.close();
+            //socket.close();
         });
 
         // Handle potential errors
@@ -103,10 +106,6 @@ function getIpAddress(domain) {
         });
     });
 }
-
-getIpAddress('www.google.com').then(res => {
-    console.log(res);
-});
 
 app.listen(port, function() {
     console.log(`Listening on port ${port}`);
