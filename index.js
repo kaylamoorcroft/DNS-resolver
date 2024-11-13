@@ -46,7 +46,7 @@ function createQuery(domain) {
     return Buffer.concat([id, flags, questionCount, answerCount, authorityCount, additionalCount, qName, qType, qClass]);
 }
 
-function parseResponse(res) {
+function parseResponse(dnsQuery, res) {
     // Parse the header
     const transactionId = res.slice(0, 2).toString('hex');
     const flags = res.slice(2, 4).toString('hex');
@@ -74,21 +74,24 @@ function parseResponse(res) {
     }
 }
 
-const dnsQuery = createQuery("www.google.com");
-console.log(dnsQuery);
-console.log(dnsQuery.toString());
+// gets ip address from domain by sending query to server and parsing response
+function getIpAddress(domain) {
+    const query = createQuery(domain);
 
-// Send the query packet to a DNS server
-socket.send(dnsQuery, 53, '8.8.8.8', (err) => {
-    if (err) console.error('Error sending query:', err);
-    else console.log('Query sent');
-});
+    // Send the query packet to a DNS server
+    socket.send(query, 53, '8.8.8.8', (err) => {
+        if (err) console.error('Error sending query:', err);
+        else console.log('Query sent');
+    });
 
-socket.on('message', (response) => {
-    console.log('DNS Response:', response);
-    parseResponse(response);
-    socket.close();
-});
+    socket.on('message', (response) => {
+        console.log('DNS Response:', response);
+        parseResponse(query, response);
+        socket.close();
+    });
+}
+
+getIpAddress('www.google.com');
 
 app.listen(port, function() {
     console.log(`Listening on port ${port}`);
