@@ -66,6 +66,11 @@ function parseResponse(res) {
         // Convert the IP buffer to a readable IP address
         const ipAddress = `${ip[0]}.${ip[1]}.${ip[2]}.${ip[3]}`;
         console.log(`Resolved IP Address: ${ipAddress}`);
+        return ipAddress;
+    }
+    else {
+        console.log("No answers found...");
+        return null;
     }
 }
 
