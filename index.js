@@ -46,6 +46,29 @@ function createQuery(domain) {
     return Buffer.concat([id, flags, questionCount, answerCount, authorityCount, additionalCount, qName, qType, qClass]);
 }
 
+function parseResponse(res) {
+    // Parse the header
+    const transactionId = res.slice(0, 2).toString('hex');
+    const flags = res.slice(2, 4).toString('hex');
+    const questionCount = res.readUInt16BE(4); // readUInt16BE reads 2 bits at time to get actual decimal number instead of hex
+    const answerCount = res.readUInt16BE(6);
+  
+    console.log(`Transaction ID: ${transactionId}`);
+    console.log(`Flags: ${flags}`);
+    console.log(`Questions: ${questionCount}`);
+    console.log(`Answers: ${answerCount}`);
+
+    if (answerCount > 0) {
+        // skip question section to get to the answer
+        // ip address starts 12 bytes into the answer section
+        const ip = res.slice(12 + dnsQuery.length); 
+
+        // Convert the IP buffer to a readable IP address
+        const ipAddress = `${ip[0]}.${ip[1]}.${ip[2]}.${ip[3]}`;
+        console.log(`Resolved IP Address: ${ipAddress}`);
+    }
+}
+
 const dnsQuery = createQuery("www.google.com");
 console.log(dnsQuery);
 console.log(dnsQuery.toString());
