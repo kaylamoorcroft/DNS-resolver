@@ -10,8 +10,13 @@ This is a custom DNS resolver built in Node.js for educational purposes. It cons
 # Getting Started
 1. Prerequisites:  
 - Node.js installed.
-2. Installation:  
-`npm install`
+- Basic understanding of DNS.
+2. Installation:
+```
+git clone https://github.com/kaylamoorcroft/dns-resolver
+cd dns-resolver
+npm install
+```
 3. Running the App:  
 `npm start`
 
