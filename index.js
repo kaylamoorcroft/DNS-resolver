@@ -19,10 +19,13 @@ app.get('/', function(req, res) {
     res.sendFile(process.cwd() + '/views/index.html');
 });
 
-app.post('/api/ip',function(req,res) {
-    getIpAddress(req.body.domain).then(ipAddress => {
+app.get('/resolve',function(req,res) {
+    getIpAddress(req.query.domain).then(ipAddress => {
         console.log(ipAddress);
-        res.json({domain: req.body.domain, ip: ipAddress});
+        return res.json({domain: req.query.domain, ip: ipAddress});
+    }).catch(err => {
+        console.log("error caught: ", err);
+        return res.status(500).json({ error: `Unable to resolve domain "${req.query.domain}"` });
     });
 });
 
@@ -48,7 +51,7 @@ function createQuery(domain) {
     // Concatenate all parts to form the full DNS query packet
     return Buffer.concat([id, flags, questionCount, answerCount, authorityCount, additionalCount, qName, qType, qClass]);
 }
-
+console.log(createQuery("www.example.com"));
 // parses response from dns server and returns ip address
 function parseResponse(dnsQuery, res) {
     // Parse the header
@@ -66,7 +69,7 @@ function parseResponse(dnsQuery, res) {
         // skip question section to get to the answer
         // ip address starts 12 bytes into the answer section
         const ip = res.slice(12 + dnsQuery.length); 
-
+        console.log("IP address in hex:",ip);
         // Convert the IP buffer to a readable IP address
         const ipAddress = `${ip[0]}.${ip[1]}.${ip[2]}.${ip[3]}`;
         console.log(`Resolved IP Address: ${ipAddress}`);
@@ -74,7 +77,7 @@ function parseResponse(dnsQuery, res) {
     }
     else {
         console.log("No answers found...");
-        return null;
+        socket.emit('error', new Error("No answers found in DNS response"));
     }
 }
 
@@ -101,8 +104,9 @@ function getIpAddress(domain) {
 
         // Handle potential errors
         socket.on('error', (err) => {
+            console.log("there was an error")
             reject(err);
-            socket.close();
+            //socket.close();
         });
     });
 }

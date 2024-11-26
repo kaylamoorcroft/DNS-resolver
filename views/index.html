@@ -7,16 +7,25 @@
     <body>
         <h1>DNS Resolver</h1>
         <main>
-            <form action="api/ip" method="POST">
+            <form id="form">
                 <fieldset>
                     <legend>Enter domain name to convert to IP address:</legend>
                     <input id="domain-input" name="domain" type="text" placeholder="www.google.com">
-                    <input type="submit" value="Resolve domain">
+                    <button id="submit-button">Resolve domain</button>
                 </fieldset>
             </form>
+            <div id="ip-result" class="hidden">
+                <h3>Domain:</h3>
+                <p id="domain"></p>
+                <h3>IP address:</h3>
+                <p id="ip-address"></p>
+            </div>
+            <div id="error" class="hidden">
+            </div>
         </main>
         <footer>
             <p>by Kayla Moorcroft, Kaylee Smith, Wendy Xia</p>
         </footer>
+        <script src="/public/script.js"></script>
     </body>
 </html>
