@@ -1,6 +1,5 @@
 const dgram = require('dgram');
 const express = require('express');
-const bodyParser = require("body-parser");
 
 const app = express();
 const appPort = 3000; 
@@ -10,10 +9,6 @@ const socket = dgram.createSocket('udp4'); // UDP socket
 
 // give access to files in public directory
 app.use('/public', express.static(`${process.cwd()}/public`));
-
-// for parsing body of post requests
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 
 // serve home page
 app.get('/', function(req, res) {
