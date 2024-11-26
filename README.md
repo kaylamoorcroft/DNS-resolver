@@ -8,11 +8,11 @@ This is a custom DNS resolver built in Node.js for educational purposes. It cons
 - Error handling
 
 # Getting Started
-1. Prerequisites:
+1. Prerequisites:  
 - Node.js installed.
-2. Installation:
+2. Installation:  
 `npm install`
-3. Running the App:
+3. Running the App:  
 `npm start`
 
 # Usage
@@ -22,16 +22,18 @@ This is a custom DNS resolver built in Node.js for educational purposes. It cons
 - Console logs in the terminal will provide DNS resolution details such as the DNS query and response packets.
 
 # Project Structure
-project-root/
-├── public/
-│   ├── style.css       # Frontend styles
-│   ├── script.js       # Frontend JavaScript
-├── views/
-│   ├── index.html      # Main HTML file
-├── server.js           # Backend code
-├── package.json        # Dependencies and scripts
-├── package-lock.json   # Locked versions of dependencies
+```
+project-root/  
+├── public/  
+│   ├── style.css       # Frontend styles  
+│   ├── script.js       # Frontend JavaScript  
+├── views/  
+│   ├── index.html      # Main HTML file  
+├── server.js           # Backend code  
+├── package.json        # Dependencies and scripts  
+├── package-lock.json   # Locked versions of dependencies  
 ├── README.md           # Project documentation
+```
 
 # How It Works
 - Creates a DNS query packet in binary.
