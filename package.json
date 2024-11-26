@@ -1,12 +1,12 @@
 {
     "name": "dns-resolver",
     "version": "0.1.0",
-    "main": "index.js",
+    "main": "server.js",
     "scripts": {
-        "start": "node index.js"
+        "start": "node server.js"
     },
     "description": "Resolves domains into IP addresses",
-    "author": "Kayla Moorcroft",
+    "author": "Kayla Moorcroft, Kaylee Smith, Wendy Xia",
     "license": "MIT",
     "dependencies": {
         "dgram": "^1.0.1",
