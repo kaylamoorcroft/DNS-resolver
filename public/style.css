@@ -1,8 +1,14 @@
+* {
+    box-sizing: border-box;
+}
 body {
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
-    margin: 50px 100px;
+    margin: 0;
     background: lavender;
+}
+main {
+    margin: 50px 100px;
 }
 input, button {
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -15,10 +21,12 @@ input, button {
 }
 footer {
     position: fixed;
-    bottom: 10px;
-    width: 85%;
+    bottom: 0;
+    width: 100%;
     text-align: center;
     color: grey;
+    background: lavender;
+    padding: 10px;
 }
 .hidden {
     display: none;
