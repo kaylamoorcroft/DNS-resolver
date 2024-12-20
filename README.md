@@ -1,6 +1,8 @@
 # Project Overview
 This is a custom DNS resolver built in Node.js for educational purposes. It constructs DNS query packets, sends them to a DNS server, and parses the responses to resolve domain names into IP addresses. A simple web interface is included to make the program user-friendly.
 
+![image of web app](./cover-image.png)
+
 # Features
 - Resolves domain names to IP addresses using UDP.
 - Custom packet construction and parsing.
